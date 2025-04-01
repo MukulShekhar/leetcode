@@ -15,7 +15,7 @@ class Solution {
         for(int i:graph[node]){
             dfs(graph,i,res,path,vis,dest);
         }
-        vis[node]=false;
+
         path.remove(path.size()-1);
     }
     public List<List<Integer>> allPathsSourceTarget(int[][] graph) {

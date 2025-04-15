@@ -1,23 +1,34 @@
-class Solution { 
-    int m, n;
+class Solution {
     public int kthSmallest(int[][] matrix, int k) {
-        m = matrix.length; n = matrix[0].length; 
-        int left = matrix[0][0], right = matrix[m-1][n-1], ans = -1;
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int left = matrix[0][0];            
+        int right = matrix[m - 1][n - 1];   
         while (left <= right) {
-            int mid = (left + right) >> 1;
-            if (countLessOrEqual(matrix, mid) >= k) {
-                ans = mid;
+            int mid = left + (right - left) / 2;
+            int count = countl(matrix, mid);
+
+            if (count < k) {
+                left = mid + 1;
+            } else {
                 right = mid - 1;
-            } else left = mid + 1;
+            }
         }
-        return ans;
+        return left;
     }
-    int countLessOrEqual(int[][] matrix, int x) {
-        int cnt = 0, c = n - 1; 
-        for (int r = 0; r < m; ++r) {
-            while (c >= 0 && matrix[r][c] > x) --c;  
-            cnt += (c + 1);
+    private int countl(int[][] matrix, int target) {
+        int count = 0;
+        int n = matrix[0].length;
+        int row = 0;
+        int col = n - 1;
+        while (row < matrix.length && col >= 0) {
+            if (matrix[row][col] <= target) {
+                count += (col + 1);
+                row++;
+            } else {
+                col--; 
+            }
         }
-        return cnt;
+        return count;
     }
 }

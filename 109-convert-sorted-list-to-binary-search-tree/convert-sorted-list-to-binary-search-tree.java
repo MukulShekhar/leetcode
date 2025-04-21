@@ -24,21 +24,33 @@
  * }
  */
 class Solution {
-    public TreeNode dfs(ListNode head,ListNode tail){
+    public TreeNode dfs(ListNode head){
         ListNode fast=head;
         ListNode slow=head;
-        if(head==tail) return null;
-        while(fast!=tail && fast.next!=tail){
-            fast=fast.next.next;
-            slow=slow.next;
+        ListNode temp = null;
+
+        if(head == null){
+            return null;
         }
+        
+        while(fast!=null && fast.next!= null){
+            fast=fast.next.next;
+            temp = slow;
+            slow=slow.next;
+            
+        }
+      
         TreeNode root=new TreeNode(slow.val);
-        root.left=dfs(head,slow);
-        root.right=dfs(slow.next,tail);
+        if(temp != null){
+        temp.next = null;
+        }
+        if(head == slow) return root;
+        root.left=dfs(head);
+        root.right=dfs(slow.next);
         return root;
     }
     public TreeNode sortedListToBST(ListNode head) {
         if(head==null) return null;
-        return dfs(head,null);
+        return dfs(head);
     }
 }

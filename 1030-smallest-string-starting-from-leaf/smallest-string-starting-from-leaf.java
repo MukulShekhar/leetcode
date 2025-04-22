@@ -21,10 +21,7 @@ class Solution {
         }
         res=(char)(root.val+97)+res;
         if(root.left==null && root.right==null){
-            if(ans==""){
-            ans=res;
-            }
-            if(ans.compareTo(res)>0){
+            if(ans.equals("") || ans.compareTo(res)>0){
             ans=res;
             }
         }

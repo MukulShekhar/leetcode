@@ -1,6 +1,7 @@
+
 class Solution {
     public int totalFruit(int[] fruits) {
-        int maxL=0;
+        int ml=0;
         int l=0;
         HashMap<Integer,Integer> map=new HashMap<>();
         for(int r=0;r<fruits.length;r++){
@@ -12,8 +13,8 @@ class Solution {
                 }
                 l++;
             }
-            maxL=Math.max(maxL,r-l+1);
+            ml=Math.max(ml,r-l+1);
         }
-        return maxL;
+        return ml;
     }
 }

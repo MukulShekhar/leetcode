@@ -1,12 +1,11 @@
 class Solution {
-    private TreeNode first = null; // First misplaced node
-    private TreeNode second = null; // Second misplaced node
-    private TreeNode prev = null; // Keeps track of the previous node during traversal
+    private TreeNode first = null; 
+    private TreeNode second = null; 
+    private TreeNode prev = null; 
 
     public void recoverTree(TreeNode root) {
         inorder(root);
 
-        // Swap the values of the two nodes
         if (first != null && second != null) {
             int temp = first.val;
             first.val = second.val;
@@ -17,13 +16,13 @@ class Solution {
     private void inorder(TreeNode node) {
         if (node == null) return;
 
-        inorder(node.left); // Visit left subtree
+        inorder(node.left); 
 
         if (prev != null && prev.val > node.val) {
             if (first == null) {
-                first = prev; // Mark the first violation
+                first = prev; 
             }
-            second = node; // Mark the second violation
+            second = node; 
         }
         prev = node; 
 

@@ -1,18 +1,32 @@
 class Solution {
-    private static final String[] map={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
-    private static void backtrack(String digits,int index,String current,List<String> result){
-        if(index==digits.length()){
-            result.add(current);
+
+
+    public List<String> letterCombinations(String digits) {
+       
+        List<String> list=new ArrayList<>();
+        String s[]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        combination(0,digits,new StringBuilder(),list,s);
+         return list;
+
+    }
+
+    public static void combination(int i,String digits,StringBuilder sb,List<String> list,String s[])
+    {
+        if(i==digits.length())
+        {
+            list.add(sb.toString());
             return;
         }
-        for(char letter:map[digits.charAt(index)-'0'].toCharArray()){
-            backtrack(digits,index+1,current+letter,result);
+
+        String t=s[digits.charAt(i)-'0'];
+        for(char c:t.toCharArray())
+        {
+            sb.append(c);
+            combination(i+1,digits,sb,list,s);
+            sb.deleteCharAt(sb.length()-1);
         }
-    }
-    public List<String> letterCombinations(String digits) {
-        if(digits.isEmpty()) return new ArrayList<>();
-        List<String> result=new ArrayList<>();
-        backtrack(digits,0,"",result);
-        return result;
+ 
+        
+
     }
 }

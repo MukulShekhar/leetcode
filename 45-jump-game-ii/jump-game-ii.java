@@ -1,20 +1,21 @@
 class Solution {
     public int jump(int[] nums) {
-          int totalj=0;
-          int n=nums.length;
-          int dest=n-1;
-          int lastjin=0,coverage=0;
-          if(n==1) return 0;
-          for(int i=0;i<n-1;i++){
-            coverage=Math.max(coverage,i+nums[i]);
-            if(i==lastjin){
-                lastjin=coverage;
-                totalj++;
-                if(coverage>=dest){
-                return totalj;
+        int n=nums.length;
+        int tj=0;
+        int c=0;
+        int lij=0;
+        int d=n-1;
+        if(n==1) return 0;
+        for(int i=0;i<n;i++){
+            c=Math.max(c,i+nums[i]);
+            if(i==lij){
+                lij=c;
+                tj++;
+                if(c>=d){
+                    return tj;
+                }
             }
-            }
-          }
-          return totalj;     
+        }
+        return tj;
     }
 }

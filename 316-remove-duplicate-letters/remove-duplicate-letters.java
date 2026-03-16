@@ -1,6 +1,6 @@
 class Solution {
     public String removeDuplicateLetters(String s) {
-         Map<Character, Integer> freq = new HashMap<>();
+        Map<Character, Integer> freq = new HashMap<>();
         Set<Character> set = new HashSet<>();
         Stack<Character> stack = new Stack<>();
 

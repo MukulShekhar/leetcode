@@ -1,36 +1,40 @@
 class Solution {
     public List<Integer> eventualSafeNodes(int[][] graph) {
-        int n = graph.length;        
-        List<Integer> res = new ArrayList<>();
-        
-        int[] visited=new int[n]; 
-
-        for(int i=0; i<n; i++){
-
-            if(visited[i]==0){
-                dfs(i, graph, visited);
+        int n=graph.length;
+        List<List<Integer>> rev=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            rev.add(new ArrayList<>());
+        }
+        int[] out=new int[n];
+        for(int i=0;i<n;i++){
+            for(int nei:graph[i]){
+                rev.get(nei).add(i);
+                out[i]++;
             }
-
-            if(visited[i]==1){
+        }
+        Queue<Integer> q=new LinkedList<>();
+        for(int i=0;i<n;i++){
+            if(out[i]==0){
+                q.offer(i);
+            }
+        }
+        boolean[] safe=new boolean[n];
+        while(!q.isEmpty()){
+            int node=q.poll();
+            safe[node]=true;
+            for(int prev:rev.get(node)){
+                out[prev]--;
+                if(out[prev]==0){
+                    q.offer(prev);
+                }
+            }
+        }
+        List<Integer> res=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            if(safe[i]){
                 res.add(i);
             }
         }
         return res;
     }
-    void dfs(int idx, int[][] graph, int[] visited){   
-
-        visited[idx]=2;
-        for(int node:graph[idx]){            
-
-            if(visited[node]==0){
-                dfs(node, graph, visited);
-            }
-
-            if(visited[node]==2){
-                return;
-            }
-        }
-         visited[idx]=1;
-    }
-    
 }
